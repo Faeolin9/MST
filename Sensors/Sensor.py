@@ -23,7 +23,7 @@ class Sensor():
 
         self.queue = Queue()
 
-        crea_thread = Thread(target=self.__creator_thread, name=f'DataGenerator{name}', args=(seed, n_min, n_max, self.queue), daemon=True)
+        crea_thread = Thread(target=self.__creator_thread, name=f'DataGenerator{name}', args=(seed, n_min, n_max, self.queue))
 
         crea_thread.start()
 

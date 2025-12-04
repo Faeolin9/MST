@@ -1,9 +1,6 @@
-import paho.mqtt.client as mqtt
-import paho.mqtt.enums as en
-from SensorFactory import SensorFactory
+
+from .Sensors import SensorFactory
 import keyboard
-import time
-import json
 
 
 if __name__ == "__main__":
@@ -16,25 +13,11 @@ if __name__ == "__main__":
 
     power_sensor = factory.get_temperaterature_sensor()
 
-    
-    client = mqtt.Client(en.CallbackAPIVersion.VERSION2)
-    client.connect("broker.hivemq.com", 1883, 60)
-    client.loop_start()
 
     while not keyboard.is_pressed('q'):
-        
-        temp_data = temp_sensor.get_data()
-        if not len(temp_data) == 0:
+        # read new data from the sensors
+        pass
 
-            client.publish('MST/Solution/Temperature', json.dumps({'data': temp_data}))
-        power_data = power_sensor.get_data()
-        if not len(power_data) == 0:
-            
-            client.publish('MST/Solution/Power', json.dumps({'data': power_data}))
-        time.sleep(.1)
+        # publish data to the broker
     
-    client.loop_stop()
-    client.disconnect()
-
-       
-            
+    
